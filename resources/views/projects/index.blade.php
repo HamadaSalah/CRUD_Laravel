@@ -6,8 +6,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
+            @include('includes.messages')
             <div class="row">
-                @include('includes.messages')
+                @if (session()->has('message'))
+                {{session()->get('message')}}
+                {{session()->forget('message')}}
+
+                @endif
+                  
+                    
                 @foreach ($projects as $project)
                     <div class="col-md-4">
                         <div class="card card-success" style="margin-bottom: 20px">

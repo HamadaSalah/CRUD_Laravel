@@ -29,6 +29,11 @@ class ProjectsController extends Controller
             'name' => 'required|max:200',
             'desc' => 'required|max:200',
             'coverImage' => 'image|mimes:jpeg,jpg,png,bmp|max:1999'
+        ],[],[
+            'name' => ' Missing Name Name',
+            'desc' => 'Missing Description',
+            'coverImage' => 'Image not allowd to Upload'
+
         ]);
         if ($request->hasFile('coverImage')) {
             $file = $request->file('coverImage');
@@ -45,6 +50,8 @@ class ProjectsController extends Controller
         $project->desc = $request->desc;
         $project->image = $filename;
         $project->save();
+        session()->put('message', 'ADDED SUCCESSFULLY');
+        
         return redirect('/projects')->with('status' , 'Project Added Successfuly !');
     }
     public function edit($id) {
